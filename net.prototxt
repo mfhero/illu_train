@@ -1,0 +1,390 @@
+name: "TestNet"
+layer {
+  name: "illu_dis"
+  type: "Input"
+  top: "data_dis"
+}
+layer {
+  name: "illu_flux"
+  type: "Data"
+  top: "data_flux"
+}
+layer {
+  name: "illu_rrd"
+  type: "Data"
+  top: "data_rrd"
+}
+
+#############################################################################
+layer {
+  name: "concat1"
+  type: "Concat"
+  bottom: "data_flux"
+  bottom: "data_rrd"
+  top: "concat1"
+}
+layer {
+  name: "concat2"
+  type: "Concat"
+  bottom: "concat1"
+  bottom: "data_dis"
+  top: "data"
+}
+
+
+
+layer {
+  name: "convA1"
+  type: "Convolution"
+  bottom: "data"
+  top: "convA1"
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+  convolution_param {
+    num_output: 100
+    kernel_size: 5
+    pad: 2
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+
+layer {
+  name: "reluA1"
+  type: "ReLU"
+  bottom: "convA1"
+  top: "convA1"
+}
+
+
+layer {
+  name: "convA2"
+  type: "Convolution"
+  bottom: "convA1"
+  top: "convA2"
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+  convolution_param {
+    num_output: 100
+    kernel_size: 5
+    pad: 2
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+
+layer {
+  name: "reluA2"
+  type: "ReLU"
+  bottom: "convA2"
+  top: "convA2"
+}
+
+
+layer {
+  name: "convA3"
+  type: "Convolution"
+  bottom: "convA2"
+  top: "convA3"
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+  convolution_param {
+    num_output: 100
+    kernel_size: 5
+    pad: 2
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+
+layer {
+  name: "reluA3"
+  type: "ReLU"
+  bottom: "convA3"
+  top: "convA3"
+}
+
+#############################################################################
+
+layer {
+  name: "convB1"
+  type: "Convolution"
+  bottom: "convA3"
+  top: "convB1"
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+  convolution_param {
+    num_output: 100
+    kernel_size: 5
+    pad: 2
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+
+layer {
+  name: "reluB1"
+  type: "ReLU"
+  bottom: "convB1"
+  top: "convB1"
+}
+
+
+layer {
+  name: "convB2"
+  type: "Convolution"
+  bottom: "convB1"
+  top: "convB2"
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+  convolution_param {
+    num_output: 100
+    kernel_size: 5
+    pad: 2
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+
+layer {
+  name: "reluB2"
+  type: "ReLU"
+  bottom: "convB2"
+  top: "convB2"
+}
+
+
+layer {
+  name: "convB3"
+  type: "Convolution"
+  bottom: "convB2"
+  top: "convB3"
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+  convolution_param {
+    num_output: 100
+    kernel_size: 5
+    pad: 2
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+
+layer {
+  name: "reluB3"
+  type: "ReLU"
+  bottom: "convB3"
+  top: "convB3"
+}
+
+
+
+#############################################################################
+
+layer {
+  name: "convC1"
+  type: "Convolution"
+  bottom: "convB3"
+  top: "convC1"
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+  convolution_param {
+    num_output: 100
+    kernel_size: 5
+    pad: 2
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+
+layer {
+  name: "reluC1"
+  type: "ReLU"
+  bottom: "convC1"
+  top: "convC1"
+}
+
+
+layer {
+  name: "convC2"
+  type: "Convolution"
+  bottom: "convC1"
+  top: "convC2"
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+  convolution_param {
+    num_output: 100
+    kernel_size: 5
+    pad: 2
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+
+layer {
+  name: "reluC2"
+  type: "ReLU"
+  bottom: "convC2"
+  top: "convC2"
+}
+
+
+layer {
+  name: "convC3"
+  type: "Convolution"
+  bottom: "convC2"
+  top: "convC3"
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+  convolution_param {
+    num_output: 100
+    kernel_size: 5
+    pad: 2
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+
+layer {
+  name: "reluC3"
+  type: "ReLU"
+  bottom: "convC3"
+  top: "convC3"
+}
+
+
+####################################
+
+layer {
+  name: "LastConv"
+  type: "Convolution"
+  bottom: "convC3"
+  top: "LastConv"
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+  convolution_param {
+    num_output: 1
+    kernel_size: 1
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+
+layer {
+  name: "try"
+  type: "PhotonMapping"
+  bottom: "data_dis"
+  bottom: "data_flux"
+  top: "BadConv"
+}
+
+##########################################################
+#layer {
+#  name: "accuracy"
+#  type: "Accuracy"
+#  bottom: "LastConv"
+#  bottom: "label"
+#  top: "accuracy"
+#  include {
+#    phase: TEST
+#  }
+#}
+#layer {
+#  name: "Slient"
+#  type: "Silence"
+#  bottom: "BadConv"
+#  bottom: "label_name"
+#  bottom: "flux_name"
+#  bottom: "rrd_name"
+#  bottom: "dis_name"
+#}
